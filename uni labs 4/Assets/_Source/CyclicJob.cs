@@ -48,12 +48,8 @@ public class ObjectProcessor : MonoBehaviour
 
     private void ComputeLogarithms()
     {
-        if (Time.time - lastLogTime >= logarithmCooldown)
-        {
-            lastLogTime = Time.time;
-            LogJob logJob = new LogJob(Random.Range(minLogValue, maxLogValue), logValues);
-            JobHandle logHandle = logJob.Schedule(transformArray);
-        }
+        LogJob logJob = new LogJob(Random.Range(minLogValue, maxLogValue));
+        JobHandle handle = logJob.Schedule();
     }
 
     private void OnDestroy()

@@ -3,21 +3,17 @@ using UnityEngine.Jobs;
 using Unity.Collections;
 using Unity.Jobs;
 
-public struct LogJob : IJobParallelForTransform
+public struct LogJob : IJob
 {
-    private float value;
-    private NativeArray<float> logValues;
+    private float logValue;
 
-    public LogJob(float value, NativeArray<float> logValues)
+    public LogJob(float value)
     {
-        this.value = value;
-        this.logValues = logValues;
+        logValue = value;
     }
 
-    public void Execute(int index, TransformAccess transform)
+    public void Execute()
     {
-        float logResult = Mathf.Log(value);
-        logValues[index] = logResult;
-        Debug.Log($"Logarithm of {value} for object {index}: {logResult}");
+        Debug.Log(Mathf.Log(logValue));
     }
 }
